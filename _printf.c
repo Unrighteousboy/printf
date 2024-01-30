@@ -1,4 +1,5 @@
 #include "main.h"
+#include <unistd.h>
 #include <stdarg.h>
 /**
  * _printf - print anything
@@ -11,7 +12,7 @@ int _printf(const char *format, ...)
 
 	va_list args;
 
-	if (format == NULL)
+	if (*format == NULL)
 	{
 		return (-1);
 	}
@@ -46,8 +47,8 @@ int _printf(const char *format, ...)
 			else if (*format == 's')
 			{
 				char *str = va_arg(args, char*);
-				write(1, str, _strlen(str));
-				char_size += _strlen(str);
+				write(1, str, strlen(str));
+				char_size += strlen(str);
 			}
 		}
 	}
