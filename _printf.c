@@ -12,12 +12,12 @@ int _printf(const char *format, ...)
 
 	va_list args;
 
-	if (*format == NULL)
+	va_start(args, format);
+
+	if (format == NULL)
 	{
 		return (-1);
 	}
-
-	va_start(args, format);
 
 	for (; *format; format++)
 	{
@@ -47,10 +47,17 @@ int _printf(const char *format, ...)
 			else if (*format == 's')
 			{
 				char *str = va_arg(args, char*);
-				write(1, str, strlen(str));
-				char_size += strlen(str);
+				write(1, str, _strlen(str));
+				char_size += _strlen(str);
 			}
 		}
 	}
 	return (char_size);
+	va_end(args);
+}
+
+int main(void)
+{
+	_printf("%s", "Godwin");
+	return (0);
 }
